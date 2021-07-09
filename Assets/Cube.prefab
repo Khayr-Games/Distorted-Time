@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8192254809704520942}
   - component: {fileID: 8192254809704520937}
   - component: {fileID: 8192254809704520936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: suelo
   m_Icon: {fileID: 0}
