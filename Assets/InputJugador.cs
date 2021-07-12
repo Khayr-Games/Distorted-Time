@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/InputJugador.inputactions'
 
 using System;
 using System.Collections;
@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @Input : IInputActionCollection, IDisposable
+public class @InputJugador : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Input()
+    public @InputJugador()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""Input"",
+    ""name"": ""InputJugador"",
     ""maps"": [
         {
             ""name"": ""Jugador"",
@@ -30,6 +30,14 @@ public class @Input : IInputActionCollection, IDisposable
                     ""name"": ""salto"",
                     ""type"": ""Button"",
                     ""id"": ""e7191bfc-44b4-4a3b-8bcd-f9652c7f31ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""disparo"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b8f098c-390c-4ee5-b7a5-a7638ef76716"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -99,6 +107,17 @@ public class @Input : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""salto"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b3f9613-8a77-4f51-8d00-26fff0356a03"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""disparo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -172,6 +191,7 @@ public class @Input : IInputActionCollection, IDisposable
         m_Jugador = asset.FindActionMap("Jugador", throwIfNotFound: true);
         m_Jugador_Moverse = m_Jugador.FindAction("Moverse", throwIfNotFound: true);
         m_Jugador_salto = m_Jugador.FindAction("salto", throwIfNotFound: true);
+        m_Jugador_disparo = m_Jugador.FindAction("disparo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -223,12 +243,14 @@ public class @Input : IInputActionCollection, IDisposable
     private IJugadorActions m_JugadorActionsCallbackInterface;
     private readonly InputAction m_Jugador_Moverse;
     private readonly InputAction m_Jugador_salto;
+    private readonly InputAction m_Jugador_disparo;
     public struct JugadorActions
     {
-        private @Input m_Wrapper;
-        public JugadorActions(@Input wrapper) { m_Wrapper = wrapper; }
+        private @InputJugador m_Wrapper;
+        public JugadorActions(@InputJugador wrapper) { m_Wrapper = wrapper; }
         public InputAction @Moverse => m_Wrapper.m_Jugador_Moverse;
         public InputAction @salto => m_Wrapper.m_Jugador_salto;
+        public InputAction @disparo => m_Wrapper.m_Jugador_disparo;
         public InputActionMap Get() { return m_Wrapper.m_Jugador; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -244,6 +266,9 @@ public class @Input : IInputActionCollection, IDisposable
                 @salto.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSalto;
                 @salto.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSalto;
                 @salto.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSalto;
+                @disparo.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnDisparo;
+                @disparo.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnDisparo;
+                @disparo.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnDisparo;
             }
             m_Wrapper.m_JugadorActionsCallbackInterface = instance;
             if (instance != null)
@@ -254,6 +279,9 @@ public class @Input : IInputActionCollection, IDisposable
                 @salto.started += instance.OnSalto;
                 @salto.performed += instance.OnSalto;
                 @salto.canceled += instance.OnSalto;
+                @disparo.started += instance.OnDisparo;
+                @disparo.performed += instance.OnDisparo;
+                @disparo.canceled += instance.OnDisparo;
             }
         }
     }
@@ -307,5 +335,6 @@ public class @Input : IInputActionCollection, IDisposable
     {
         void OnMoverse(InputAction.CallbackContext context);
         void OnSalto(InputAction.CallbackContext context);
+        void OnDisparo(InputAction.CallbackContext context);
     }
 }

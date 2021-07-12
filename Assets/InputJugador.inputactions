@@ -1,5 +1,5 @@
 {
-    "name": "Input",
+    "name": "InputJugador",
     "maps": [
         {
             "name": "Jugador",
@@ -17,6 +17,14 @@
                     "name": "salto",
                     "type": "Button",
                     "id": "e7191bfc-44b4-4a3b-8bcd-f9652c7f31ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "disparo",
+                    "type": "Button",
+                    "id": "5b8f098c-390c-4ee5-b7a5-a7638ef76716",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -86,6 +94,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "salto",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b3f9613-8a77-4f51-8d00-26fff0356a03",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "disparo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

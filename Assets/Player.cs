@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private float velocidad;
+    [SerializeField] public float velocidad;
     [SerializeField] private float impulso;
     [SerializeField] private float detectarPiso;
     [SerializeField] private float detectarPared;
+    [SerializeField] private GameObject bala;
     private Vector2 direccionDeInput;
     Transform jugador;
     Rigidbody2D rb;
@@ -18,15 +19,15 @@ public class Player : MonoBehaviour
     bool tocaSuelo;
     bool tocaSueloP;
     bool wallJumping;
+    bool deslizar;
     float tocaParedDerechaOIzquierda;
-
-
+    public Vector3 worldPosition;
     public Transform groundCheck;
     public Transform paredDerechaCheck;
     public Transform paredIzquierdaCheck;
     public LayerMask groundLayer;
     public LayerMask paredLayer;
-    
+
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     {
         Mover();
         WallJumping();
+        Deslizar();
     }
 
     private void FixedUpdate()
@@ -56,13 +58,13 @@ public class Player : MonoBehaviour
 
     private void Mover()
     {
-       
-        
-        jugador.Translate(Vector3.right * this.direccionDeInput.x * Time.deltaTime * this.velocidad, Space.Self);
-         
-    
 
- 
+
+        jugador.Translate(Vector3.right * this.direccionDeInput.x * Time.deltaTime * this.velocidad, Space.Self);
+
+
+
+
     }
 
     private void OnSalto()
@@ -70,14 +72,14 @@ public class Player : MonoBehaviour
         if (tocaSuelo || tocaSueloP && !tocaParedDerecha && !tocaParedIzquierda)
         {
             rb.AddForce(new Vector2(0f, impulso), ForceMode2D.Impulse);
-            
+
         }
-       
+
         if (tocaParedDerecha && !tocaSuelo)
         {
             tocaParedDerechaOIzquierda = -3;
             wallJumping = true;
-            
+
         }
 
         if (tocaParedIzquierda && !tocaSuelo)
@@ -87,16 +89,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void  WallJumping()
+    private void WallJumping()
     {
-      if (wallJumping)
+        if (wallJumping)
         {
             rb.velocity = new Vector2(velocidad * tocaParedDerechaOIzquierda, impulso);
             Invoke("DesactivarWallJumping", 0.1f);
         }
     }
 
-   
+
     void DesactivarWallJumping()
     {
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
@@ -104,4 +106,41 @@ public class Player : MonoBehaviour
         wallJumping = false;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
+
+
+    public void OnDisparo(InputValue value)
+    {
+        GameObject nuevaBala;
+        if ((float)value.Get() == 1f)
+        {
+            nuevaBala = Instantiate(bala, jugador.position, jugador.rotation);
+        }
+
+    }
+
+    void Deslizar()
+    {
+        if (tocaParedDerecha && !tocaSuelo)
+        {
+            deslizar = true;
+        }
+
+        if (tocaParedIzquierda && !tocaSuelo)
+        {
+            deslizar = true;
+        }
+
+        if (!tocaParedDerecha && !tocaParedIzquierda)
+        {
+            deslizar = false;
+            
+        }
+
+        if (deslizar)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -4f,float.MaxValue));
+        }
+
+    }
+
 }

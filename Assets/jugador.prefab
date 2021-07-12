@@ -100,6 +100,17 @@ MonoBehaviour:
   playerInput: {fileID: 4219241717924704827}
   velocidad: 5
   impulso: 10
+  detectarPiso: 0.4
+  detectarPared: 0.4
+  groundCheck: {fileID: 0}
+  paredDerechaCheck: {fileID: 0}
+  paredIzquierdaCheck: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  paredLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &4219241717924704827
 MonoBehaviour:
   m_ObjectHideFlags: 0
