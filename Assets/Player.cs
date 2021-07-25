@@ -143,4 +143,16 @@ public class Player : MonoBehaviour
 
     }
 
+    public void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("lal"))
+        {
+
+            Destroy(gameObject);
+
+
+        }
+
+    }
+
 }
