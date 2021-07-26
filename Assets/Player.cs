@@ -58,13 +58,7 @@ public class Player : MonoBehaviour
 
     private void Mover()
     {
-
-
         jugador.Translate(Vector3.right * this.direccionDeInput.x * Time.deltaTime * this.velocidad, Space.Self);
-
-
-
-
     }
 
     private void OnSalto()
