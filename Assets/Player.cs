@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -33,7 +35,6 @@ public class Player : MonoBehaviour
     {
         jugador = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     public void OnMoverse(InputValue valor)
@@ -148,7 +149,7 @@ public class Player : MonoBehaviour
         if (col.gameObject.CompareTag("lal"))
         {
 
-            Destroy(gameObject);
+            SceneManager.LoadScene("Nivel");
 
 
         }

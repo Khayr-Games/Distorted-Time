@@ -21,10 +21,13 @@ public class LogicaCamara : MonoBehaviour
 
     void Update()
     {
-        MoverCamara();
         ClampearCamara();
     }
 
+    void FixedUpdate()
+    {
+        MoverCamara();
+    }
 
     void MoverCamara()
     {
